@@ -7,180 +7,131 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
 <style>
   *{margin:0;padding:0;box-sizing:border-box;font-family:'Inter',sans-serif;}
-  body{background:#121212;color:#f5f5f5;line-height:1.6;scroll-behavior:smooth;}
+  body{background:#121212;color:#f5f5f5;line-height:1.6;}
   a{text-decoration:none;color:inherit;}
   img{max-width:100%;border-radius:10px;}
   .container{max-width:1200px;margin:2rem auto;padding:0 2rem;}
 
-  header{text-align:center;padding:4rem 0 2rem 0;}
-  header h1{font-size:3rem;color:#ff6a00;}
-  header h2{font-size:1.5rem;color:#f5f5f5;font-weight:400;margin-top:0.5rem;}
+  header{background:#1e1e1e;padding:2rem;text-align:center;position:sticky;top:0;z-index:10;}
+  header h1{color:#ff6a00;}
 
-  section{padding:4rem 0;}
-  section h2{font-size:2rem;color:#ff6a00;text-align:center;margin-bottom:2rem;}
-  .about p{max-width:800px;margin:1rem auto;font-size:1.1rem;text-align:center;color:#ddd;}
+  .products{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:2rem;}
+  .product-card{background:#1e1e1e;padding:1rem;border-radius:12px;transition:transform 0.3s, box-shadow 0.3s;cursor:pointer;}
+  .product-card:hover{transform:translateY(-5px);box-shadow:0 10px 20px rgba(255,106,0,0.4);}
+  .product-card img{margin-bottom:0.5rem;}
+  .product-card h3{color:#ff6a00;margin-bottom:0.5rem;}
+  .product-card p{font-size:0.9rem;color:#ccc;margin-bottom:0.5rem;}
+  .product-card button{background:#ff6a00;color:#121212;border:none;padding:0.5rem 1rem;border-radius:8px;font-weight:600;cursor:pointer;transition:background 0.3s;}
+  .product-card button:hover{background:#ffa64d;transform:scale(1.05);}
 
-  .skills{display:flex;flex-wrap:wrap;justify-content:center;gap:1rem;}
-  .skill{background:#1e1e1e;padding:1rem 1.5rem;border-radius:12px;transition:transform 0.3s, background 0.3s;cursor:default;color:#f5f5f5;font-weight:600;}
-  .skill:hover{transform:scale(1.1);background:#ff6a00;color:#121212;}
+  .cart{position:fixed;top:1rem;right:1rem;background:#ff6a00;color:#121212;padding:0.5rem 1rem;border-radius:12px;font-weight:600;cursor:pointer;z-index:100;}
 
-  .projects{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:2rem;}
-  .project-card{background:#1e1e1e;padding:1.5rem;border-radius:12px;transition:transform 0.3s, box-shadow 0.3s;}
-  .project-card:hover{transform:translateY(-10px);box-shadow:0 10px 20px rgba(255,106,0,0.4);}
-  .project-card h3{color:#ff6a00;margin-bottom:0.5rem;}
-  .project-card p{font-size:0.95rem;color:#ccc;margin-bottom:1rem;}
-  .project-card a{display:inline-block;margin-right:1rem;padding:0.5rem 1rem;background:#ff6a00;color:#121212;border-radius:8px;font-weight:600;transition:background 0.3s;}
-  .project-card a:hover{background:#ffa64d;}
+  .cart-modal{display:none;position:fixed;top:0;right:0;width:350px;height:100%;background:#1e1e1e;padding:1.5rem;box-shadow:-5px 0 20px rgba(0,0,0,0.5);z-index:1000;overflow-y:auto;transition:transform 0.3s;}
+  .cart-modal.show{display:block;transform:translateX(0);}
+  .cart-modal h3{color:#ff6a00;margin-bottom:1rem;}
+  .cart-item{display:flex;justify-content:space-between;margin-bottom:1rem;color:#ddd;}
+  .cart-total{margin-top:1rem;font-weight:700;color:#ff6a00;}
+  .close-cart{cursor:pointer;color:#fff;float:right;font-size:1.2rem;margin-top:-2rem;}
 
-  .cart{position:fixed;top:1rem;right:1rem;background:#ff6a00;color:#121212;padding:0.75rem 1.2rem;border-radius:12px;font-weight:600;cursor:pointer;z-index:100;}
-  
-  /* MODAL */
-  .modal{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.8);justify-content:center;align-items:center;z-index:1000;}
-  .modal-content{background:#1e1e1e;padding:2rem;border-radius:12px;max-width:500px;width:90%;position:relative;}
-  .modal-content h3{color:#ff6a00;margin-bottom:1rem;}
-  .modal-content p{color:#ddd;margin-bottom:1rem;}
-  .close-btn{position:absolute;top:0.5rem;right:1rem;font-size:1.5rem;color:#fff;cursor:pointer;}
-
-  table{width:100%;color:#ddd;border-collapse:collapse;margin-bottom:1rem;}
-  th,td{padding:0.5rem;text-align:left;}
-  th{color:#ff6a00;}
-  button.confirm{background:#ff6a00;color:#121212;border:none;padding:0.5rem 1rem;border-radius:8px;font-weight:600;cursor:pointer;transition:background 0.3s;}
-  button.confirm:hover{background:#ffa64d;}
+  footer{text-align:center;padding:2rem 0;color:#777;margin-top:2rem;}
+  @media(max-width:768px){.product-card img{height:150px;object-fit:cover;}}
 </style>
 </head>
 <body>
 
 <header>
-  <h1>Alejandro Insfran</h1>
-  <h2>Front-End Developer & UI/UX Designer</h2>
+  <h1>DOMRA E-Commerce</h1>
 </header>
 
 <button class="cart" id="cart-button">Cart (0)</button>
 
-<section class="about container">
-  <h2>About Me</h2>
-  <p>
-    I'm a Front-End Developer and UI/UX Designer from Paraguay with experience in web development and database management.  
-    I specialize in <strong>responsive, user-friendly applications</strong> with <strong>React, JS, HTML, CSS</strong> and design thinking.  
-    Experience in <strong>SQL, PL/SQL, MySQL, SQL Azure, Oracle Forms & Reports</strong> and <strong>Python</strong>.
-  </p>
+<section class="container products" id="product-list">
+  <!-- Productos generados por JS -->
 </section>
 
-<section class="skills-section container">
-  <h2>Skills</h2>
-  <div class="skills">
-    <div class="skill">React</div>
-    <div class="skill">JavaScript</div>
-    <div class="skill">HTML5 & CSS3</div>
-    <div class="skill">Figma</div>
-    <div class="skill">UI/UX Design</div>
-    <div class="skill">SQL</div>
-    <div class="skill">PL/SQL</div>
-    <div class="skill">MySQL</div>
-    <div class="skill">SQL Azure</div>
-    <div class="skill">Oracle Forms & Reports</div>
-    <div class="skill">Python</div>
-    <div class="skill">Git & GitHub</div>
-  </div>
-</section>
-
-<section class="projects-section container">
-  <h2>Projects</h2>
-  <div class="projects">
-    <div class="project-card">
-      <h3>DOMRA E-Commerce</h3>
-      <p>
-        Responsive e-commerce website for <strong>DOMRA</strong>. Includes product catalog, shopping cart, and clean UI/UX.
-      </p>
-      <a href="https://github.com/ale13211/domra-ecommerce" target="_blank">GitHub</a>
-      <a href="https://ale13211.github.io/domra-ecommerce/" target="_blank">Live Demo</a>
-    </div>
-  </div>
-</section>
-
-<footer>
-  &copy; 2026 Alejandro Insfran. Designed & Developed by me.
-</footer>
-
-<!-- CART MODAL -->
-<div class="modal" id="cart-modal">
-  <div class="modal-content">
-    <span class="close-btn" onclick="closeCart()">&times;</span>
-    <h3>Your Cart</h3>
-    <div id="cart-items"></div>
-    <p id="cart-total"></p>
-    <button class="confirm" onclick="confirmOrder()">Confirm Order via WhatsApp</button>
-  </div>
+<div class="cart-modal" id="cart-modal">
+  <span class="close-cart" onclick="toggleCart()">✕</span>
+  <h3>Your Cart</h3>
+  <div id="cart-items"></div>
+  <div class="cart-total" id="cart-total"></div>
+  <button onclick="checkout()" style="margin-top:1rem;width:100%;background:#ff6a00;color:#121212;padding:0.7rem;border:none;border-radius:8px;font-weight:600;cursor:pointer;">Confirm Order</button>
 </div>
 
+<footer>&copy; 2026 DOMRA. Designed & Developed by Alejandro Insfran.</footer>
+
 <script>
-const products = [
-  {name:"Cable iPhone", price:49000, img:"cable-iphone.png"},
-  {name:"Protector de Cable", price:49000, img:"protector-cable.png"},
-  {name:"Wireless Charger", price:49000, img:"wireless-charger.png"}
+const products=[
+  {name:"Cable iPhone", desc:"Durable charging cable for iPhone.", category:"cable", price:15000,img:"cable-iphone.png"},
+  {name:"Protector de Cable", desc:"Protects your charging cables.", category:"protector", price:9000,img:"protector-cable.png"},
+  {name:"Wireless Charger", desc:"Fast wireless charger.", category:"charger", price:35000,img:"wireless-charger.png"}
 ];
 
-let cart = [];
-const cartButton = document.getElementById('cart-button');
+let cart=[];
 
-function addToCart(product){
-  const existing = cart.find(p => p.name === product.name);
-  if(existing) existing.qty += 1;
-  else cart.push({...product, qty:1});
-  cartButton.textContent = `Cart (${cart.reduce((a,b)=>a+b.qty,0)})`;
+const productList=document.getElementById('product-list');
+const cartButton=document.getElementById('cart-button');
+const cartModal=document.getElementById('cart-modal');
+const cartItemsEl=document.getElementById('cart-items');
+const cartTotalEl=document.getElementById('cart-total');
 
-  // Animación simple
-  cartButton.style.transform = 'scale(1.2)';
-  setTimeout(()=>cartButton.style.transform='scale(1)',200);
-}
-
-function openCart(){
-  const modal = document.getElementById('cart-modal');
-  const cartDiv = document.getElementById('cart-items');
-  cartDiv.innerHTML='';
-  let total = 0;
-  cart.forEach(item=>{
-    total += item.price * item.qty;
-    const row = document.createElement('div');
-    row.innerHTML = `${item.name} x ${item.qty} - Gs. ${item.price*item.qty}`;
-    cartDiv.appendChild(row);
+function renderProducts(){
+  productList.innerHTML='';
+  products.forEach(p=>{
+    const card=document.createElement('div');
+    card.className='product-card';
+    card.innerHTML=`
+      <img src="${p.img}" alt="${p.name}">
+      <h3>${p.name}</h3>
+      <p>${p.desc}</p>
+      <p>Gs. ${p.price.toLocaleString()}</p>
+      <button onclick="addToCart('${p.name}')">Add to Cart</button>
+    `;
+    productList.appendChild(card);
   });
-  document.getElementById('cart-total').textContent = `Total: Gs. ${total}`;
-  modal.style.display='flex';
 }
 
-function closeCart(){
-  document.getElementById('cart-modal').style.display='none';
+function addToCart(name){
+  const prod=products.find(p=>p.name===name);
+  const existing=cart.find(c=>c.name===name);
+  if(existing){
+    existing.qty+=1;
+  } else {
+    cart.push({name:prod.name, price:prod.price, qty:1});
+  }
+  cartButton.textContent=`Cart (${cart.reduce((a,b)=>a+b.qty,0)})`;
+  renderCart();
+  // animación amigable
+  alert(`${name} added to cart!`);
 }
 
-function confirmOrder(){
-  if(cart.length===0){alert("Cart is empty"); return;}
-  let message = "Hola, quiero confirmar mi pedido:%0A";
-  let total = 0;
+function renderCart(){
+  cartItemsEl.innerHTML='';
+  let total=0;
   cart.forEach(item=>{
-    message += `${item.name} x ${item.qty} - Gs. ${item.price*item.qty}%0A`;
-    total += item.price*item.qty;
+    total+=item.price*item.qty;
+    const div=document.createElement('div');
+    div.className='cart-item';
+    div.innerHTML=`<span>${item.name} x${item.qty}</span><span>Gs. ${(item.price*item.qty).toLocaleString()}</span>`;
+    cartItemsEl.appendChild(div);
   });
-  message += `Total: Gs. ${total}`;
-  const whatsappURL = `https://wa.me/595982164843?text=${message}`;
-  window.open(whatsappURL,'_blank');
+  cartTotalEl.textContent=`Total: Gs. ${total.toLocaleString()}`;
 }
 
-// Render products
-const projectsDiv = document.querySelector('.projects');
-products.forEach(product=>{
-  const card = document.createElement('div');
-  card.className='project-card';
-  card.innerHTML=`
-    <img src="${product.img}" alt="${product.name}">
-    <h3>${product.name}</h3>
-    <p>Gs. ${product.price}</p>
-    <button onclick="addToCart(${JSON.stringify(product)})">Add to Cart</button>
-  `;
-  projectsDiv.appendChild(card);
-});
+function toggleCart(){cartModal.classList.toggle('show');}
 
-cartButton.addEventListener('click',openCart);
+cartButton.addEventListener('click',toggleCart);
+
+function checkout(){
+  if(cart.length===0){alert("Cart is empty!");return;}
+  let msg="Hola, quiero confirmar mi pedido:\n";
+  cart.forEach(i=>msg+=`${i.name} x${i.qty} - Gs. ${(i.price*i.qty).toLocaleString()}\n`);
+  const total=cart.reduce((a,b)=>a+b.price*b.qty,0);
+  msg+=`Total: Gs. ${total.toLocaleString()}`;
+  const url=`https://wa.me/595982164843?text=${encodeURIComponent(msg)}`;
+  window.open(url,'_blank');
+}
+
+renderProducts();
 </script>
 
 </body>
