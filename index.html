@@ -6,6 +6,22 @@
 <title>DOMRA E-Commerce</title>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
 <style>
+ <!-- Añadir esto dentro del <body>, justo antes del </body> -->
+<div id="toast" style="
+  position: fixed;
+  top: 1rem;
+  right: 1rem;
+  background: #ff6a00;
+  color: #121212;
+  padding: 1rem 1.5rem;
+  border-radius: 12px;
+  font-weight: 600;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.5s ease, transform 0.5s ease;
+  z-index: 9999;
+">Agregado al carrito!</div>
   *{margin:0;padding:0;box-sizing:border-box;font-family:'Inter',sans-serif;}
   body{background:#121212;color:#f5f5f5;line-height:1.6;}
   a{text-decoration:none;color:inherit;}
@@ -100,8 +116,18 @@ function addToCart(name){
   }
   cartButton.textContent=`Cart (${cart.reduce((a,b)=>a+b.qty,0)})`;
   renderCart();
-  // animación amigable
-  alert(`${name} added to cart!`);
+  showToast(`${name} agregado al carrito!`);
+}
+
+function showToast(message){
+  const toast=document.getElementById('toast');
+  toast.textContent=message;
+  toast.style.opacity='1';
+  toast.style.transform='translateY(0)';
+  setTimeout(()=>{
+    toast.style.opacity='0';
+    toast.style.transform='translateY(-20px)';
+  },2000);
 }
 
 function renderCart(){
