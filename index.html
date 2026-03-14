@@ -138,7 +138,26 @@ const products = [
   }
 
   function filterProducts(category){renderProducts(category);}
-  
+  // Reemplazar imágenes placeholder por imágenes reales si existen
+const imageReplacements = {
+  "cable-iphone.png": "cable-iphone-real.png",
+  "protector-cable.png": "protector-cable-real.png",
+  "wireless-charger.png": "wireless-charger-real.png"
+};
+
+function replaceImages() {
+  document.querySelectorAll('.product-card img').forEach(img => {
+    const realSrc = imageReplacements[img.getAttribute('src')];
+    // Verifica si la imagen real está disponible
+    fetch(realSrc, { method: 'HEAD' })
+      .then(res => {
+        if(res.ok) img.src = realSrc; // reemplaza si existe
+      }).catch(err => { /* si no existe, deja placeholder */ });
+  });
+}
+
+// Llamar después de renderizar productos
+replaceImages();
   // INITIAL RENDER
   renderProducts();
 </script>
