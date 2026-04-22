@@ -21,7 +21,6 @@
 * { margin:0; padding:0; box-sizing:border-box; }
 body { background:var(--bg); color:var(--text); font-family:'DM Sans', sans-serif; line-height:1.6; min-height:100vh; }
 
-/* NOISE OVERLAY */
 body::before {
   content:'';
   position:fixed; inset:0;
@@ -29,7 +28,6 @@ body::before {
   pointer-events:none; z-index:0; opacity:0.4;
 }
 
-/* HEADER */
 header {
   position:sticky; top:0; z-index:50;
   background:rgba(10,10,10,0.85);
@@ -45,7 +43,6 @@ header {
 }
 .logo span { color:var(--orange); }
 
-/* CART BUTTON */
 .cart-btn {
   display:flex; align-items:center; gap:0.5rem;
   background:var(--surface2);
@@ -66,7 +63,6 @@ header {
 .cart-count.bump { animation: bump 0.3s ease; }
 @keyframes bump { 0%,100%{transform:scale(1)} 50%{transform:scale(1.4)} }
 
-/* HERO */
 .hero {
   padding:5rem 2.5rem 3rem;
   max-width:1200px; margin:0 auto;
