@@ -1,15 +1,29 @@
-# DOMRA E-Commerce
+# DOMRA E-Commerce 🛒
 
-Responsive front-end project for a tech accessories store, showcasing **Front-End Development** and **UI/UX Design** skills.
+A responsive e-commerce web application with a functional shopping cart built with vanilla JavaScript.
 
-## Features
-- Responsive layout for desktop, tablet, and mobile  
-- Clean UI/UX with hover effects and modals  
-- Dynamic product listing with JavaScript  
-- Product filtering by category  
-- Interactive shopping cart
+🔗 **Live Demo:** [https://ale13211.github.io/domra-ecommerce/](https://ale13211.github.io/domra-ecommerce/)
 
-## Technologies
-- HTML5, CSS3 (Flex & Grid), JavaScript ES6+  
-- Figma (UI/UX design)  
-- Git & GitHub
+---
+
+## ✨ Features
+
+- Product listing with dynamic rendering
+- Add to cart functionality
+- Cart counter in real time
+- Order confirmation flow
+- Fully responsive design
+
+---
+
+## 🔧 Tech Stack
+
+![HTML5](https://img.shields.io/badge/HTML5-E34F26?style=flat&logo=html5&logoColor=white)
+![CSS3](https://img.shields.io/badge/CSS3-1572B6?style=flat&logo=css3&logoColor=white)
+![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=flat&logo=javascript&logoColor=black)
+
+---
+
+## 🚀 Getting Started
+
+```bash
