@@ -27,3 +27,13 @@ A responsive e-commerce web application with a functional shopping cart built wi
 ## 🚀 Getting Started
 
 ```bash
+git clone https://github.com/ale13211/domra-ecommerce.git
+cd domra-ecommerce
+open index.html
+```
+
+---
+
+## 👤 Author
+
+**Alejandro Insfran** — [LinkedIn](https://www.linkedin.com/in/alejandro-daniel-insfran-ca%C3%B1ete-721518279/) · [GitHub](https://github.com/ale13211)
